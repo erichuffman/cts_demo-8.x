@@ -1,0 +1,95 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the CTS Demo theme.
+ */
+
+/**
+ * Implements hook_preprocess_HOOK() for HTML document templates.
+ *
+ * Adds body classes if certain regions have content.
+ */
+function cts_demo_preprocess_html(&$variables) {
+
+  // Retrieving skin option selected in theme settings
+  $site_flavor = theme_get_setting('site_flavor', 'cts_demo');
+  $variables['attributes']['class'][] = 'cts-skin-' . $site_flavor;
+
+}
+
+/**
+ * Override or insert variables into the page templates.
+ *
+ * @param $variables
+ *   An array of variables to pass to the theme template.
+ * @param $hook
+ *   The name of the template being rendered ("page" in this case.)
+ * @TODO: gt_tools check doesn't work properly with overlay turned on.
+ */
+function cts_demo_preprocess_page(&$variables, $hook) {
+
+  /**
+   * Below is where we set the variables based on our custom theme settings selections,
+   * which are used in the page.tpl.php file.
+   *
+   */
+
+  // Retrieve the Division selection from the theme settings,
+  // and set the variable with the appropriate text.
+  $division_id = theme_get_setting('division_id');
+  switch ($division_id) {
+    case 0:
+      $variables['division_id'] = 'Divison of Leprechaun Arbitration';
+      break;
+    case 1:
+      $variables['division_id'] = 'Divison of Sugar Procurement';
+      break;
+    case 2:
+      $variables['division_id'] = 'Divison of Marshmallow Engineering';
+      break;
+    default:
+      $variables['division_id'] = 'Divison of Leprechaun Arbitration';
+  }
+
+  // Retrieve the Territory selection from the theme settings,
+  // and set the variable with the appropriate text.
+  $division_id = theme_get_setting('territory_id');
+  switch ($division_id) {
+    case 0:
+      $variables['territory_id'] = 'Northeastern United States Territory';
+      break;
+    case 1:
+      $variables['territory_id'] = 'Southeastern United States Territory';
+      break;
+    case 2:
+      $variables['territory_id'] = 'Southwestern United States Territory';
+      break;
+    default:
+      $variables['territory_id'] = 'Northeastern United States Territory';
+  }
+
+  // Retrieve the main menu location selection from the theme settings,
+  // and set the variable with the appropriate text.
+  $main_menu_location = theme_get_setting('main_menu_location');
+  switch ($main_menu_location) {
+    case 0:
+      $variables['main_menu_location'] = 'top';
+      break;
+    case 1:
+      $variables['main_menu_location'] = 'sidebar';
+      break;
+    default:
+      $variables['main_menu_location'] = 'top';
+  }
+
+  // Check whether or not they've opted to include a leprechaun mascot
+  $leprechaun_mascot = theme_get_setting('leprechaun_mascot');
+  if ($leprechaun_mascot != '') {
+    $variables['leprechaun_mascot'] = $leprechaun_mascot;
+    $leprechaun_mascot_style = theme_get_setting('leprechaun_mascot_style');
+    $variables['leprechaun_mascot_style'] = $leprechaun_mascot_style;
+  } else {
+    $variables['leprechaun_mascot'] = FALSE;
+  }
+}

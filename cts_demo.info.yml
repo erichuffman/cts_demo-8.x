@@ -1,0 +1,17 @@
+name: Custom Theme Setting D8 Demo Theme
+description: 'A theme for demonstrating how to configure some basic custom theme settings in Drupal 8.'
+base theme: classy
+package: Custom
+type: theme
+version: 1.0
+core: 8.x
+libraries:
+  - cts_demo/global-styling
+regions:
+  secondary_menu: 'Secondary menu'
+  help: 'Help'
+  page_title: 'Page Title'
+  breadcrumb: 'Breadcrumb'
+  primary_menu: 'Primary menu'
+  content: 'Content'
+  footer: 'Footer'

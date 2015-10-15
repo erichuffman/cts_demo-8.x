@@ -1,0 +1,5 @@
+# Schema for the configuration files of the CTS Demo theme.
+
+cts_demo.settings:
+  type: theme_settings
+  label: 'CTS settings'

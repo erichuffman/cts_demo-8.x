@@ -1,0 +1,135 @@
+{#
+/**
+ * @file
+ * CTS Demo's theme implementation to display a single Drupal page.
+ *
+ * The doctype, html, head, and body tags are not in this template. Instead
+ * they can be found in the html.html.twig template normally located in the
+ * core/modules/system directory.
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - base_path: The base URL path of the Drupal installation. Will usually be
+ *   "/" unless you have installed Drupal in a sub-directory.
+ * - is_front: A flag indicating if the current page is the front page.
+ * - logged_in: A flag indicating if the user is registered and signed in.
+ * - is_admin: A flag indicating if the user has permission to access
+ *   administration pages.
+ *
+ * Site identity:
+ * - front_page: The URL of the front page. Use this instead of base_path when
+ *   linking to the front page. This includes the language domain or prefix.
+ * - logo: The url of the logo image, as defined in theme settings.
+ * - site_name: The name of the site. This is empty when displaying the site
+ *   name has been disabled in the theme settings.
+ * - site_slogan: The slogan of the site. This is empty when displaying the site
+ *   slogan has been disabled in theme settings.
+ *
+ * Page content (in order of occurrence in the default page.html.twig):
+ * - node: Fully loaded node, if there is an automatically-loaded node
+ *   associated with the page and the node ID is the second argument in the
+ *   page's path (e.g. node/12345 and node/12345/revisions, but not
+ *   comment/reply/12345).
+ *
+ * Regions:
+ * - page.secondary_menu: Secondary menu (user account menu)
+ * - page.help: For site help, messages, and tabs
+ * - page.page_title: The page title
+ * - page.breadcrumb: The breadcrumb trail
+ * - page.primary_menu: The primary site menu (main navigation)
+ * - page.content: The primary cotent of the site
+ * - page.footer: The site footer
+ *
+ * @see template_preprocess_page()
+ * @see seven_preprocess_page()
+ * @see html.html.twig
+ */
+#}
+<div class="l-page page">
+  <header class="header">
+
+    <!-- secondary menu region -->
+    <nav class="secondary-menu clearfix" role="navigation">
+      {{ page.secondary_menu }}
+    </nav>
+
+    <section class="header__identity clearfix">
+
+      <!-- logo -->
+      <h1 class="header__mdc-logo"><a href="{{ base_path }}" title="Magically Delicious Corp">Magically Delicious Corp</a></h1>
+
+      <!-- division id -->
+      <h2 class="header__division-id">{{ division_id }}</h2>
+
+      <!-- territory id -->
+      <h3 class="header__territory-id">{{ territory_id }}</h3>
+
+    </section>
+  </header>
+
+  <div id="content" class="content clearfix">
+
+    <!-- Add menu location to class -->
+    <div class="content__container main-menu-{{ main_menu_location }}">
+
+      <!-- Check content in page help region (tabs, messages, etc.) -->
+      {% if page.help %}
+        <div class="support clearfix">
+          {{ page.help }}
+        </div>
+      {% endif %}
+
+      <!--
+        If menu is set to be output up top via theme settings
+        we'll output the main menu region here
+       -->
+      {% if main_menu_location == 'top' %}
+        <nav class="main-menu--top clearfix" role="navigation">
+          {{ page.primary_menu }}
+        </nav>
+      {% endif %}
+
+      <div class="content__main"></a>
+
+        <!-- page title -->
+        {{ page.page_title }}
+
+        <!-- breadcrumb -->
+        <div class="breadcrumb__wrapper">
+          {{ page.breadcrumb }}
+        </div>
+
+        <!--
+          If menu is set to be output on the side via theme settings
+          we'll output the main menu region here.
+        -->
+        {% if main_menu_location == 'sidebar' %}
+          <nav class="main-menu--sidebar" role="navigation">
+            {{ page.primary_menu }}
+          </nav>
+        {% endif %}
+
+        <!-- Adding menu location class -->
+        <div class="content__body-wrapper--menu-{{ main_menu_location }}">
+
+          <!--
+            if a leprechaun mascot was selected place it here and add class
+            based on the leprechaun style from the custom theme settings
+          -->
+          {% if leprechaun_mascot %}
+            <div class="leprechaun--{{ leprechaun_mascot_style }}"></div>
+          {% endif %}
+
+          {{ page.content }}
+
+        </div><!-- /.content__body-wrapper -->
+      </div><!-- /.content__main -->
+    </div><!-- /.content__container -->
+  </div><!-- /.content -->
+  <div class="footer">
+    <!-- if footer content place it here -->
+    {{ page.footer }}
+    <p class="footer__copyright">Copyright Magically Delicious Corporation</p>
+  </div><!-- /.footer -->
+ </div><!-- /.page -->

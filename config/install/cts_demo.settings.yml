@@ -1,0 +1,17 @@
+# Set default options for Drupal's default theme settings...
+features:
+  # "User pictures in comments"
+  comment_user_picture: false
+  # " User verification status in comments"
+  comment_user_verification: false
+  # "Shortcut icon"
+  favicon: false
+  # "User pictures in posts"
+  node_user_picture: false
+# Set default options for CTS' default theme settings...
+site_flavor: 'green-clovers'
+territory_id: 0
+division_id: 0
+main_menu_location: 0
+leprechaun_mascot: 0
+leprechaun_mascot_style: 'Smiley McSmiles'
